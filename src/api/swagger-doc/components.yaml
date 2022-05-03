@@ -1,0 +1,70 @@
+components:
+  schemas:
+    Error:  
+      type: object
+      properties:
+        data:
+          type: object
+          default: null
+          nullable: true
+        error:
+          type: object
+          properties:
+            httpCode:
+              type: integer
+            message:
+              type: string
+
+    AddTransaction:
+      type: object
+      properties:
+        date: 
+          type: string
+          required: true
+        id:
+          type: integer
+          required: true
+        customerId:
+          type: integer
+          required: false
+         
+
+    AddRuleset:
+      type: object
+      properties:
+        startDate: 
+          type: string
+          required: true
+        endDate:
+          type: string
+          required: true
+        cashback:
+          type: number
+          required: true
+        redemptionLimit:
+          type: integer
+          required: false
+        minTransactions:
+          type: integer
+          required: false
+        budget:
+          type: number
+          required: false
+
+    GetCashbacks:
+      type: object
+      properties:
+        httpCode:
+          type: number
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              transactionId:
+                type: integer
+              amount: 
+                type: number
+        error:  
+          type: object
+          nullable: true      

@@ -1,0 +1,41 @@
+paths:
+  /transactions: # route
+    post:
+      tags:  # API grouping
+      - "Transaction"
+      summary: "Add a transction"
+      requestBody:
+        description: Add customer transction
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddTransaction'
+            transaction:
+                  value:
+                    date: "2022-02-01"
+                    id: 1
+                    customerId: 123
+              
+      responses:
+        "201":
+          description: "Ok"
+              
+        "400":
+          description: "validation error"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                error:
+                  value:
+                    httpCode: 400
+                    message: "Validation error"
+                  
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'

@@ -1,0 +1,50 @@
+paths:
+  /rulesets: # route
+    post:
+      tags:  # API grouping
+      - "Ruleset"
+      summary: "Add a rulset"
+      requestBody:
+        description: Add a cashback ruleset
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRuleset'
+            examples:
+                ruleset:
+                  value:
+                    startDate: "2022-02-01"
+                    endDate: "2022-02-02"
+                    cashback: 12
+                    redemptionLimit: 12
+                    minTransactions: 2
+                    budget: 100
+              
+      responses:
+        "201":
+          description: "Ok"
+              
+        "400":
+          description: "validation error"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                error:
+                  value:
+                    httpCode: 400
+                    message: "Validation error"
+                  
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                error:
+                  value:
+                    httpCode: 500
+                    message: "Database exception" 

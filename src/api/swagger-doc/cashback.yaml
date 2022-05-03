@@ -1,0 +1,51 @@
+paths:
+  /cashbacks: # route
+    get:
+      tags:  # API grouping
+      - "Cashback"
+      summary: "Add a cashback"
+      parameters:
+      - in: query
+        name: "limit"
+        description: "Pagination limit"
+        required: false
+        schema:
+           type: integer
+      - in: query
+        name: "offset"
+        description: "Pagination offset - skip"
+        required: false
+        schema:
+           type: integer
+              
+      responses:
+        "200":
+          description: "Ok"
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCashbacks'
+              
+        "400":
+          description: "validation error"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                error:
+                  value:
+                    httpCode: 400
+                    message: "Validation error"
+                  
+        "500":
+          description: "Internal server error"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                error:
+                  value:
+                    httpCode: 500
+                    message: "Database exception"
